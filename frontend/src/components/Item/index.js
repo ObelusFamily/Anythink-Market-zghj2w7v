@@ -21,6 +21,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 class Item extends React.Component {
   async componentDidMount() {
+    console.log(this.props.item)
     const [item, comments] = await getItemAndComments(
       this.props.match.params.id
     );
@@ -30,6 +31,7 @@ class Item extends React.Component {
   componentWillUnmount() {
     this.props.onUnload();
   }
+  
 
   render() {
     if (!this.props.item) {
@@ -48,7 +50,7 @@ class Item extends React.Component {
           <div className="row bg-white p-4">
             <div className="col-6">
               <img
-                src={this.props.item.image}
+                src={this.props.item.image || '/placeholder.png'}
                 alt={this.props.item.title}
                 className="item-img"
                 style={{ height: "500px", width: "100%", borderRadius: "6px" }}
